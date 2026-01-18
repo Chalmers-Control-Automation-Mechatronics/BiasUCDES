@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<Module xmlns="http://waters.sourceforge.net/xsd/module" xmlns:B="http://waters.sourceforge.net/xsd/base" Name="2player7sticksPositiveBiasTowardsPlayer1">
+<B:Comment>A number of players take turns to pick 1, 2, or 3 sticks.The player who takes the last stick loses the game. This is an example of a user-interactive DES, that for certain configurations (number of players, number of sticks, counting up or down) exhibit bias towards or against player(s).The existence of a supervisor reveals such bias.By setting a certain player's events controllable, and marking the state where that player wins, positive bias towards that player can be revealed. By setting a certain player's events uncontrollable (and the other player's events uncontrollable), and marking the states where that player loses the game, negative bias against that player can be revealed.
+
+This is the case for positive bias towards Player 1 in the 2-player 7-sticks stick-picking game, Fig 1 and Fig 2 of the paper "On Bias in User-Centric Discrete-Event Systems", submitted for WODES 2026.</B:Comment>
+<EventDeclList>
+<EventDecl Kind="PROPOSITION" Name=":accepting"/>
+<EventDecl Kind="PROPOSITION" Name=":forbidden"/>
+<EventDecl Kind="CONTROLLABLE" Name="e1:1"/>
+<EventDecl Kind="CONTROLLABLE" Name="e1:2"/>
+<EventDecl Kind="CONTROLLABLE" Name="e1:3"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="e2:1"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="e2:2"/>
+<EventDecl Kind="UNCONTROLLABLE" Name="e2:3"/>
+</EventDeclList>
+<ComponentList>
+<SimpleComponent Kind="PLANT" Name="Sticks:7">
+<Graph>
+<NodeList>
+<SimpleNode Name="S0">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+</SimpleNode>
+<SimpleNode Name="S1"/>
+<SimpleNode Name="S2"/>
+<SimpleNode Name="S3"/>
+<SimpleNode Name="S4"/>
+<SimpleNode Name="S5"/>
+<SimpleNode Name="S6"/>
+<SimpleNode Initial="true" Name="S7"/>
+</NodeList>
+<EdgeList>
+<Edge Source="S1" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S2" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e2:2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S2" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S3" Target="S0">
+<LabelBlock>
+<SimpleIdentifier Name="e1:3"/>
+<SimpleIdentifier Name="e2:3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S3" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e2:2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S3" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S4" Target="S1">
+<LabelBlock>
+<SimpleIdentifier Name="e1:3"/>
+<SimpleIdentifier Name="e2:3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S4" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e2:2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S4" Target="S3">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S5" Target="S2">
+<LabelBlock>
+<SimpleIdentifier Name="e1:3"/>
+<SimpleIdentifier Name="e2:3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S5" Target="S3">
+<LabelBlock>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e2:2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S5" Target="S4">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S6" Target="S3">
+<LabelBlock>
+<SimpleIdentifier Name="e1:3"/>
+<SimpleIdentifier Name="e2:3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S6" Target="S4">
+<LabelBlock>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e2:2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S6" Target="S5">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S7" Target="S4">
+<LabelBlock>
+<SimpleIdentifier Name="e1:3"/>
+<SimpleIdentifier Name="e2:3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S7" Target="S5">
+<LabelBlock>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e2:2"/>
+</LabelBlock>
+</Edge>
+<Edge Source="S7" Target="S6">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e2:1"/>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+<SimpleComponent Kind="PLANT" Name="Players:2">
+<Graph>
+<NodeList>
+<SimpleNode Initial="true" Name="P1">
+<EventList>
+<SimpleIdentifier Name=":accepting"/>
+</EventList>
+</SimpleNode>
+<SimpleNode Name="P2"/>
+</NodeList>
+<EdgeList>
+<Edge Source="P1" Target="P2">
+<LabelBlock>
+<SimpleIdentifier Name="e1:1"/>
+<SimpleIdentifier Name="e1:2"/>
+<SimpleIdentifier Name="e1:3"/>
+</LabelBlock>
+</Edge>
+<Edge Source="P2" Target="P1">
+<LabelBlock>
+<SimpleIdentifier Name="e2:1"/>
+<SimpleIdentifier Name="e2:2"/>
+<SimpleIdentifier Name="e2:3"/>
+</LabelBlock>
+</Edge>
+</EdgeList>
+</Graph>
+</SimpleComponent>
+</ComponentList>
+</Module>
